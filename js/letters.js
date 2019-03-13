@@ -1,6 +1,7 @@
 
 var letterW = 20;
 var letterH = 10;
+var letterMul = 1.5;
 function SentenceDrawer(sentence, x, y, w, h){
 
   this.sentence = sentence;
@@ -10,7 +11,7 @@ function SentenceDrawer(sentence, x, y, w, h){
   this.w = w;
   this.h = h;
 
-  this.fullLength = this.sentence.length * letterW;
+  this.fullLength = this.sentence.length * letterW * letterMul;
   for(var i = 0; i < this.sentence.length; i++){
     this.correctList.push(false);
   }
@@ -18,9 +19,9 @@ function SentenceDrawer(sentence, x, y, w, h){
 
 SentenceDrawer.prototype.display = function(){
   push();
-  var start = (screenWidth / 2) - (this.fullLength);
+  var start = (screenWidth / 2) - (this.fullLength / 2);
   fill(255,255,255,180);
-  rect(start - 2 * letterH, this.y - 5 * letterH, 2 *( this.fullLength + 2 * letterH), 6 *letterH);
+  rect(start - letterMul * letterW, this.y - 5 * letterH, this.fullLength + letterMul * letterW, 6 *letterH);
   fill(0,0,0,255);
   textSize(letterW);
   for(var i = 0; i < this.sentence.length; i++){
@@ -28,11 +29,11 @@ SentenceDrawer.prototype.display = function(){
       line(start,this.y, start + letterW, this.y);
 
       if(this.correctList[i]){
-        text(this.sentence.charAt(i),start + 5, this.y - letterH);
+        text(this.sentence.charAt(i),start + 7, this.y - letterH);
       }
 
     }
-    start += 2 * letterW;
+    start += letterMul * letterW;
  }
  pop();
   //nothing

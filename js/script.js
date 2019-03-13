@@ -8,10 +8,13 @@
 var game;
 var screenWidth = 1080;
 var screenHeight = 700;
+var hangman;
 //preloads images
 function preload () {
   game = new Game(10, 100, 550, 800, 200);
-  game.newGame( "I LOVE TO EAT JELLO");
+  game.newGame();
+  hangman = new Hangman();
+  hangman.load();
 }
 
 function setup () {
@@ -20,7 +23,9 @@ function setup () {
 }
 
 function draw () {
+  background(198, 236, 233);
   game.display();
+  hangman.display();
 }
 //for when keys are pressed
 function keyPressed() {
