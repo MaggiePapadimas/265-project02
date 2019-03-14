@@ -1,6 +1,4 @@
 //game file
-
-//sentences for game
 var sentences= [
   "blu toys surprise juegos",
   "surprise play doh eggs peppa pig",
@@ -21,9 +19,9 @@ var sentences= [
   "superheros finger family collection",
   "batman finger song villan finger",
 ];
-//letters
+
 var letters = ['a','b','c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-//everything used for the game
+
 function Game(lives, x, y, w, h){
 
   this.sentence;
@@ -42,7 +40,7 @@ function Game(lives, x, y, w, h){
   this.nextGuess = "";
   this.gameWon = false;
 }
-//deals with the sentences
+
 Game.prototype.newGame = function(){
   var val = int(random() *( sentences.length ));
   console.log(val)
@@ -58,7 +56,7 @@ Game.prototype.newGame = function(){
   this.nextGuess = "";
   this.gameWon = false;
 }
-//display
+// display for the phone
 Game.prototype.display = function() {
   push();
 
@@ -117,13 +115,13 @@ Game.prototype.handleInputSpeech = function (inputStirng) {
         this.sentenceDrawer.lose();
       }
     }
+
   }
 }
 
 Game.prototype.prepareInput = function( input ){
   this.nextGuess = input;
 }
-
 Game.prototype.sendInput = function(){
   if(this.nextGuess.length == 1){
     console.log("guessing "+this.nextGuess);
@@ -131,7 +129,6 @@ Game.prototype.sendInput = function(){
     this.nextGuess = "";
   }
 }
-
 Game.prototype.clearInput = function(){
   this.nextGuess = "";
 }

@@ -2,21 +2,27 @@
 //
 // This is a hangman game. Most words are taken from the article https://medium.com/@jamesbridle/something-is-wrong-on-the-internet-c39c471271d2
 //
-// the game has the titles used in the article. the body is parts of different characters in reference to the "wrong head" video in the article
+// The game will generate a random sting of words that look similar to the eye catching titles on videos from youtube. The idea behind it is to show how companies and content creators are exploiting kids with mindless video. Things that never really help with the mental development.
+
+// these are the words used. They are in an array so that they can be randomly selected for the game
 var game;
 var screenWidth = 1080;
 var screenHeight = 700;
 var gameStart = false;
+var music;
+var menuDisplay
+
 //preloads images
 function preload () {
+  menuDisplay = loadImage("assets/images/menubackground.png");
   game = new Game(7, 100, 550, 800, 200);
+  music = new Audio("assets/sounds/backgroundsound.mp4");
 }
 
 function setup () {
-  //canvs size
    createCanvas(screenWidth, screenHeight);
    if (annyang) {
-     // inputs for alphabet
+     // Let's define our first command. First the text we expect, and then the function it should call
      var commands = {
          'a': function(){
            game.prepareInput("a");
@@ -96,23 +102,18 @@ function setup () {
          'z': function(){
            game.prepareInput("z");
          },
-         //yes for when annyang heard right
          'yes':function(){
            game.sendInput();
          },
-         //no for if annyang heard wrong
          'no':function(){
            game.clearInput();
          },
-         //starts new game
          'new game':function(){
            game.newGame();
          },
-         //gives up a.k.a game over
          'give up':function(){
            game.giveUp();
          },
-         //start game command
          'Start Game':function(){
            startGame();
          }
@@ -125,25 +126,29 @@ function setup () {
 
 function draw () {
   background(198, 236, 233);
+  music.play();
+  music.volume = 0.5;
   if(gameStart) game.display();
   else{
     menu();
   }
 }
-//starts game
+
 function startGame(){
   if(!gameStart){
     gameStart = true;
     game.newGame();
   }
 }
-// main menu
+
 function menu(){
   textSize(50);
   text("CLICKBAIT HANGMAN", 220, 200);
 
   textSize(30);
-  text("Use voice commands and keyboard to choose letters!", 235, 300);
+  text("Use voice commands and the keyboard to choose letters", 235, 300);
   textSize(25);
-  text("Say 'Start game' to start", 235, 400);
+  text("Say 'Start Game' to start", 235, 400);
+  image(menuDisplay, 0, 0, 1080,700);
+
 }
