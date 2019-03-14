@@ -127,7 +127,7 @@ function setup () {
 function draw () {
   background(198, 236, 233);
   music.play();
-  music.volume = 0.5;
+  music.volume = 0.2;
   if(gameStart) game.display();
   else{
     menu();
